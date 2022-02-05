@@ -11872,6 +11872,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
 .flex-row {
   flex-direction: row;
 }
@@ -12068,6 +12071,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .opacity-0 {
   opacity: 0;
+}
+.opacity-50 {
+  opacity: 0.5;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

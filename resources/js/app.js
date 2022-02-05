@@ -30,7 +30,7 @@ Vue.filter('formatDate', function(value) {
 });
 
 Vue.filter('currency', function (value) {
-    return parseInt(value).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    return parseFloat(value).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 });
 
 /**

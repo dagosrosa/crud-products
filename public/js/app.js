@@ -181,14 +181,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['modalHidden'],
-  mounted: function mounted() {
-    console.log(this.modalHidden);
+  data: function data() {
+    return {
+      selectedFile: ''
+    };
   },
+  mounted: function mounted() {},
   methods: {
     closeProductsModal: function closeProductsModal() {
+      this.selectedFile = '';
       this.$emit('modalHidden', true);
+    },
+    getFileName: function getFileName(event) {
+      this.selectedFile = event.target.value;
     }
   }
 });
@@ -232,7 +240,7 @@ Vue.filter('formatDate', function (value) {
   }
 });
 Vue.filter('currency', function (value) {
-  return parseInt(value).toLocaleString('pt-br', {
+  return parseFloat(value).toLocaleString('pt-br', {
     style: 'currency',
     currency: 'BRL'
   });
@@ -22259,6 +22267,11 @@ var render = function () {
                                 staticClass:
                                   "inline-block text-sm px-4 py-2 leading-none text-teal-400 border-teal-400 hover:border-transparent hover:text-teal hover:bg-white lg:mt-0",
                                 attrs: { href: "#" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.openUploadProductsModal()
+                                  },
+                                },
                               },
                               [_vm._v("Load your products file!")]
                             ),
@@ -22356,6 +22369,7 @@ var render = function () {
                               "svg",
                               {
                                 staticClass: "h-10 w-10 text-gray-400",
+                                class: { "text-teal-400": _vm.selectedFile },
                                 attrs: {
                                   xmlns: "http://www.w3.org/2000/svg",
                                   viewBox: "0 0 20 20",
@@ -22377,21 +22391,43 @@ var render = function () {
                             _c(
                               "span",
                               {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: !_vm.selectedFile,
+                                    expression: "!selectedFile",
+                                  },
+                                ],
                                 staticClass: "block text-gray-400 font-normal",
                               },
                               [_vm._v("Attach you files here")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "block text-teal-400 font-normal",
+                              },
+                              [_vm._v(_vm._s(_vm.selectedFile))]
                             ),
                           ]
                         ),
                       ]),
                       _vm._v(" "),
                       _c("input", {
-                        staticClass: "h-full w-full opacity-0",
+                        staticClass:
+                          "h-full w-full opacity-0 hover:cursor-pointer",
                         attrs: {
                           type: "file",
                           name: "productJsonFile",
                           id: "fileToUpload",
                           accept: ".json",
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.getFileName($event)
+                          },
                         },
                       }),
                     ]
@@ -22463,7 +22499,13 @@ var render = function () {
                         {
                           staticClass:
                             "mb-2 md:mb-0 bg-teal-400 border border-teal-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-teal-4000",
-                          attrs: { type: "submit" },
+                          class: {
+                            "opacity-50 cursor-not-allowed": !_vm.selectedFile,
+                          },
+                          attrs: {
+                            type: "submit",
+                            disabled: !_vm.selectedFile,
+                          },
                         },
                         [_vm._v("Load")]
                       ),

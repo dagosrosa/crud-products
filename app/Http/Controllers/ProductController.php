@@ -41,15 +41,15 @@ class ProductController extends Controller
             $data = json_decode($request->productJsonFile->get());
             foreach ($data as $product)
             {
-                ModelProduct::create(array(
-                    'title'=>$obj->title,
-                    'type'=>$obj->type,
-                    'description'=>$obj->description,
-                    'password'=>$obj->password,
-                    'price'=>$obj->price,
-                    'rating'=>$obj->rating
+                Product::create(array(
+                    'title'=>$product->title,
+                    'type'=>$product->type,
+                    'description'=>$product->description,
+                    'price'=>$product->price,
+                    'rating'=>$product->rating
                 ));
             }
+            return redirect('/');
         }
     }
 

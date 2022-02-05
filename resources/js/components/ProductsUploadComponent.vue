@@ -12,13 +12,14 @@
                     <div class="p-3">
                         <!--body-->
                             <div class="relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer">
-                            <div class="absolute">
-                                    <div class="flex flex-col items-center "> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" /><path d="M9 13h2v5a1 1 0 11-2 0v-5z" /></svg>
-                                        <span class="block text-gray-400 font-normal">Attach you files here</span>
-                                    </div>
-                            </div> 
-                            <input type="file" name="productJsonFile" id="fileToUpload" accept=".json" class="h-full w-full opacity-0">
+                                <div class="absolute">
+                                        <div class="flex flex-col items-center "> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" v-bind:class="{'text-teal-400': selectedFile}" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" /><path d="M9 13h2v5a1 1 0 11-2 0v-5z" /></svg>
+                                            <span class="block text-gray-400 font-normal" v-show="!selectedFile">Attach you files here</span>
+                                            <span class="block text-teal-400 font-normal">{{selectedFile}}</span>
+                                        </div>
+                                </div> 
+                                <input type="file" name="productJsonFile" id="fileToUpload" accept=".json" class="h-full w-full opacity-0 hover:cursor-pointer" v-on:change="getFileName($event)">
                             </div>
                         <div class="flex items-center justify-end space-x-1 text-sm subpixel-antialiased">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -29,7 +30,7 @@
                             <button type="button" class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100" v-on:click="closeProductsModal($event)">
                                 Back
                             </button>
-                            <button type="submit" class="mb-2 md:mb-0 bg-teal-400 border border-teal-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-teal-4000">Load</button>
+                            <button type="submit" class="mb-2 md:mb-0 bg-teal-400 border border-teal-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-teal-4000" :disabled="!selectedFile" v-bind:class="{'opacity-50 cursor-not-allowed': !selectedFile}">Load</button>
                         </div>
                     </div>
                 </form>
@@ -41,12 +42,24 @@
 <script>
     export default {
         props: ['modalHidden'],
-        mounted() {
-            console.log(this.modalHidden)
+
+        data() {
+            return {
+                selectedFile: ''
+            }
         },
+        
+        mounted() {
+        },
+
         methods: {
 			closeProductsModal() {
+                this.selectedFile = '';
                 this.$emit('modalHidden', true);
+			},
+
+			getFileName(event) {
+                this.selectedFile = event.target.value;
 			}
         }
     }
