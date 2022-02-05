@@ -15,9 +15,6 @@
     <span class="font-semibold text-xl tracking-tight mr-1">DAMASCO</span>
     <sub>SYSTEM</sub>
   </div>
-  <div>
-    <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white lg:mt-0">Load products</a>
-  </div>
 </nav>
     @yield('content')
 </div>

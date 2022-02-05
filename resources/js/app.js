@@ -23,7 +23,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
 Vue.component('products-upload-component', require('./components/ProductsUploadComponent.vue').default);
 
-
 Vue.filter('formatDate', function(value) {
     if (value) {
         return moment(String(value)).format('MM/DD/YYYY hh:mm')
