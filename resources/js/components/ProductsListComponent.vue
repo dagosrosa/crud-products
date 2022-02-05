@@ -1,9 +1,11 @@
 <template>
 	<div>
-		<products-upload-component v-bind:modalHidden="modalHidden" v-on:modalHidden="closeProductsModal()"></products-upload-component>
+		<products-upload-component v-if="action == 'upload'" v-on:listProducts="closeAll()"></products-upload-component>
+		<product-edit-component v-if="action == 'edit'" v-on:listProducts="closeAll()" :product="product"></product-edit-component>
+		<product-delete-component v-if="action == 'delete'" v-on:listProducts="closeAll()" :product="product"></product-delete-component>
 
 		<div class="container">
-			<div class="mt-3 mb-3 float-right" v-if="products.length" v-on:click="openUploadProductsModal()">
+			<div class="mt-3 mb-3 float-right" v-if="products.length" v-on:click="uploadProduct()">
 				<a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-teal-400 border-teal-400 hover:border-transparent hover:text-teal hover:bg-white lg:mt-0">Load products</a>
 			</div>
 			<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg">
@@ -25,8 +27,8 @@
 						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{product.price | currency}}</td>
 						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{product.created_at | formatDate}}</td>
 						<td class="border-grey-light border hover:bg-gray-100 p-3 flex space-x-4">
-							<div class="hover:text-blue-400 hover:font-medium cursor-pointer" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></div>
-							<div class="hover:text-red-400 hover:font-medium cursor-pointer" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></div>
+							<div class="hover:text-blue-400 hover:font-medium cursor-pointer" title="Edit" v-on:click="editProduct(product)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></div>
+							<div class="hover:text-red-400 hover:font-medium cursor-pointer" title="Remove"v-on:click="removeProduct(product)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></div>
 						</td>
 					</tr>
 					<tr v-if="!products.length">
@@ -46,16 +48,22 @@
 
 <script>
 	import ProductsUploadComponent from './ProductsUploadComponent.vue';
+	import ProductEditComponent from './ProductEditComponent.vue';
+	import ProductDeleteComponent from './ProductDeleteComponent.vue';
 
     export default {
 		component:{
-			'products-upload-component': ProductsUploadComponent
+			'products-upload-component': ProductsUploadComponent,
+			'product-edit-component': ProductEditComponent,
+			'product-delete-component': ProductDeleteComponent,
 		},
 
         data() {
             return {
             	products: [],
-				modalHidden: true
+				modalHidden: true,
+				action: 'list',
+				product: {}
             }
         },
 
@@ -66,13 +74,23 @@
                 .catch(error=> console.log(error))
             },
 
-			openUploadProductsModal() {
-				this.modalHidden = false;
+			uploadProduct() {
+				this.action = 'upload';
 			},
 
-			closeProductsModal() {
-				this.modalHidden = true;
+			closeAll() {
+				this.action = 'list';
 				this.getProducts();
+			},
+
+			editProduct(product) {
+				this.action = 'edit';
+				this.product = product;
+			},
+
+			removeProduct(product) {
+				this.action = 'delete';
+				this.product = product;
 			}
         },
 

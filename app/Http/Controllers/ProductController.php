@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use DB;
 
 class ProductController extends Controller
 {
@@ -81,9 +82,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        DB::table('product')
+        ->where('id',$id)
+        ->update(array(
+            'title'=>$request->title,
+            'type'=>$request->type,
+            'description'=>$request->description,
+            'price'=>$request->price,
+            'rating'=>$request->rating
+        ));
+        return response('Done', 200);
     }
 
     /**
@@ -93,7 +103,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
     }

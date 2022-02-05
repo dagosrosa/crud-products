@@ -22,6 +22,8 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
 Vue.component('products-upload-component', require('./components/ProductsUploadComponent.vue').default);
+Vue.component('product-edit-component', require('./components/ProductEditComponent.vue').default);
+Vue.component('product-delete-component', require('./components/ProductDeleteComponent.vue').default);
 
 Vue.filter('formatDate', function(value) {
     if (value) {
