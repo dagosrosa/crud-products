@@ -14,16 +14,17 @@ class ProductController extends Controller
     {
         $this->product = new Product();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('index');
     }
 
+    /**
+     * Return the list of the all resources.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function listAll()
     {
         $products = $this->product->all();
@@ -31,7 +32,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,31 +56,10 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Edit the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
+     * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $id)
@@ -93,29 +73,23 @@ class ProductController extends Controller
             'price'=>$request->price,
             'rating'=>$request->rating
         ));
+        
         return response('Done', 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Delete the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function delete($id)
     {
-        //
+        DB::table('product')
+        ->where('id',$id)
+        ->delete();
+
+        return response('Done', 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

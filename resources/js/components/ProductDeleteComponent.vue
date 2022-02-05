@@ -8,16 +8,16 @@
                     <span class="text-lg font-bold text-white">Delete product</span> 
                 </div>
                 <!--content-->
-                <form class="flex flex-col items-center" action="/products/" method="put">
+                <form class="flex flex-col items-center">
                     <div class="p-3">
                         <!--body-->
-
+                            <h1 class="text-xl mb-4 font-bold text-slate-500 text-center">Do you Want Delete</h1>
                         <!--footer-->
                         <div class="p-3  mt-2 text-center space-x-4 md:block">
                             <button type="button" class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100" v-on:click="close()">
                                 Cancel
                             </button>
-                            <button type="submit" class="mb-2 md:mb-0 bg-red-400 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-4000">Save</button>
+                            <button type="button" class="mb-2 md:mb-0 bg-red-400 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-4000" v-on:click="deleteProduct()">Yes, delete!</button>
                         </div>
                     </div>
                 </form>
@@ -28,20 +28,18 @@
 
 <script>
     export default {
-        props: [''],
-
-        data() {
-            return {
-            }
-        },
-        
-        mounted() {
-        },
+        props: ['product'],
 
         methods: {
 			close() {
                 this.$emit('listProducts');
 			},
+
+            deleteProduct() {
+                    axios.delete(`/products/${this.product.id}`)
+                    .then(response=> (this.close()))
+                    .catch(error=> console.log(error))
+            }
         }
     }
 </script>

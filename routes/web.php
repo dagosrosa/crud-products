@@ -18,3 +18,4 @@ Route::get('/', [ProductController::class, 'index']);
 Route::get('/products', [ProductController::class, 'listAll']);
 Route::post('/products', [ProductController::class, 'create']);
 Route::put('/products/{productId}', [ProductController::class, 'edit']);
+Route::delete('/products/{productId}', [ProductController::class, 'delete']);

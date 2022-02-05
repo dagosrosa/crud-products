@@ -76,14 +76,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: [''],
-  data: function data() {
-    return {};
-  },
-  mounted: function mounted() {},
+  props: ['product'],
   methods: {
     close: function close() {
       this.$emit('listProducts');
+    },
+    deleteProduct: function deleteProduct() {
+      var _this = this;
+
+      axios["delete"]("/products/".concat(this.product.id)).then(function (response) {
+        return _this.close();
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
   }
 });
@@ -187,12 +192,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['product'],
-  data: function data() {
-    return {
-      productId: this.product.id
-    };
-  },
-  mounted: function mounted() {},
   methods: {
     close: function close() {
       this.$emit('listProducts');
@@ -22356,51 +22355,58 @@ var render = function () {
           [
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "flex flex-col items-center",
-                attrs: { action: "/products/", method: "put" },
-              },
-              [
-                _c("div", { staticClass: "p-3" }, [
-                  _c(
-                    "div",
-                    { staticClass: "p-3  mt-2 text-center space-x-4 md:block" },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.close()
-                            },
+            _c("form", { staticClass: "flex flex-col items-center" }, [
+              _c("div", { staticClass: "p-3" }, [
+                _c(
+                  "h1",
+                  {
+                    staticClass:
+                      "text-xl mb-4 font-bold text-slate-500 text-center",
+                  },
+                  [_vm._v("Do you Want Delete")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "p-3  mt-2 text-center space-x-4 md:block" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.close()
                           },
                         },
-                        [
-                          _vm._v(
-                            "\n                            Cancel\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "mb-2 md:mb-0 bg-red-400 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-4000",
-                          attrs: { type: "submit" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Cancel\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "mb-2 md:mb-0 bg-red-400 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-4000",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.deleteProduct()
+                          },
                         },
-                        [_vm._v("Save")]
-                      ),
-                    ]
-                  ),
-                ]),
-              ]
-            ),
+                      },
+                      [_vm._v("Yes, delete!")]
+                    ),
+                  ]
+                ),
+              ]),
+            ]),
           ]
         ),
       ]
@@ -23043,7 +23049,7 @@ var render = function () {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function ($event) {
-                                    return _vm.openUploadProductsModal()
+                                    return _vm.uploadProduct()
                                   },
                                 },
                               },

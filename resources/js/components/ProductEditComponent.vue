@@ -85,15 +85,6 @@
 <script>
     export default {
         props: ['product'],
-        
-        data() {
-            return {
-                productId: this.product.id
-            }
-        },
-
-        mounted() {
-        },
 
         methods: {
 			close() {
