@@ -26,8 +26,12 @@ Vue.component('products-upload-component', require('./components/ProductsUploadC
 
 Vue.filter('formatDate', function(value) {
     if (value) {
-        return moment(String(value)).format('DD/MM/YYYY hh:mm')
+        return moment(String(value)).format('MM/DD/YYYY hh:mm')
     }
+});
+
+Vue.filter('currency', function (value) {
+    return `$ ${parseFloat(value).toFixed(2)} USD`;
 });
 
 /**

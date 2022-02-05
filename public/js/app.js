@@ -196,8 +196,11 @@ Vue.component('products-list-component', (__webpack_require__(/*! ./components/P
 Vue.component('products-upload-component', (__webpack_require__(/*! ./components/ProductsUploadComponent.vue */ "./resources/js/components/ProductsUploadComponent.vue")["default"]));
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY hh:mm');
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('MM/DD/YYYY hh:mm');
   }
+});
+Vue.filter('currency', function (value) {
+  return "$ ".concat(parseFloat(value).toFixed(2), " USD");
 });
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -22035,7 +22038,7 @@ var render = function () {
                     staticClass:
                       "border-grey-light border hover:bg-gray-100 p-3 truncate",
                   },
-                  [_vm._v(_vm._s(product.price))]
+                  [_vm._v(_vm._s(_vm._f("currency")(product.price)))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -22058,7 +22061,8 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          " text-blue-400 hover:text-blue-600 hover:font-medium cursor-pointer",
+                          "hover:text-blue-400 hover:font-medium cursor-pointer",
+                        attrs: { title: "Edit" },
                       },
                       [
                         _c(
@@ -22090,7 +22094,8 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          " text-red-400 hover:text-red-600 hover:font-medium cursor-pointer",
+                          "hover:text-red-400 hover:font-medium cursor-pointer",
+                        attrs: { title: "Remove" },
                       },
                       [
                         _c(

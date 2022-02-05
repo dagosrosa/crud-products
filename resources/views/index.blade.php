@@ -1,14 +1,5 @@
 @extends('templates.template')
 @section('content')
-<nav class="flex items-center justify-between flex-wrap bg-teal p-6 bg-teal-400">
-  <div class="flex items-center flex-no-shrink text-white mr-6">
-    <span class="font-semibold text-xl tracking-tight mr-1">DAMASCO</span>
-    <sub>SYSTEM</sub>
-  </div>
-  <div>
-    <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white mt-4 lg:mt-0">Download</a>
-  </div>
-</nav>
   <products-list-component></products-list-component>
-  <products-upload-component></products-list-component>
+  <!-- <products-upload-component></products-list-component> -->
 @endSection
