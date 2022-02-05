@@ -228,11 +228,14 @@ Vue.component('products-list-component', (__webpack_require__(/*! ./components/P
 Vue.component('products-upload-component', (__webpack_require__(/*! ./components/ProductsUploadComponent.vue */ "./resources/js/components/ProductsUploadComponent.vue")["default"]));
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('MM/DD/YYYY hh:mm');
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('DD/MM/YYYY');
   }
 });
 Vue.filter('currency', function (value) {
-  return "$ ".concat(parseFloat(value).toFixed(2), " USD");
+  return parseInt(value).toLocaleString('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  });
 });
 /**
  * Next, we will create a fresh Vue application instance and attach it to
