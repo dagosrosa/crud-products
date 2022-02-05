@@ -1,6 +1,5 @@
 <template>
 	<div class="container">
-        <input type="text"/ v-model="filterTerm">
 		<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
 			<thead class="text-white">
 				<tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0" v-for="product in products">
@@ -34,8 +33,7 @@
     export default {
         data() {
             return {
-            products: null,
-            filterTerm: ''
+            products: null
             }
         },
 

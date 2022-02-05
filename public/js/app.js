@@ -78,12 +78,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      products: null,
-      filterTerm: ''
+      products: null
     };
   },
   methods: {
@@ -115,6 +113,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -21919,7 +21952,6 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._v('/ v-model="filterTerm">\n\t\t'),
     _c(
       "table",
       {
@@ -22119,7 +22151,138 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover",
+      attrs: { id: "modal-id" },
+    },
+    [
+      _c("div", { staticClass: "absolute bg-black opacity-80 inset-0 z-0" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full max-w-lg relative mx-auto my-auto rounded-xl shadow-lg  bg-white ",
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "flex flex-col items-center",
+              attrs: {
+                action: "/products",
+                method: "post",
+                enctype: "multipart/form-data",
+              },
+            },
+            [
+              _c("div", { staticClass: "p-3" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer",
+                  },
+                  [
+                    _c("div", { staticClass: "absolute" }, [
+                      _c(
+                        "div",
+                        { staticClass: "flex flex-col items-center " },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "h-10 w-10 text-gray-400",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 20 20",
+                                fill: "currentColor",
+                              },
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d: "M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z",
+                                },
+                              }),
+                              _c("path", {
+                                attrs: { d: "M9 13h2v5a1 1 0 11-2 0v-5z" },
+                              }),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "block text-gray-400 font-normal" },
+                            [_vm._v("Attach you files here")]
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "h-full w-full opacity-0",
+                      attrs: {
+                        type: "file",
+                        name: "productJsonFile",
+                        id: "fileToUpload",
+                        accept: ".json",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex items-center justify-end space-x-1 text-sm subpixel-antialiased",
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "h-4 w-4 text-gray-400",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                        },
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      { staticClass: "block text-gray-400 font-normal" },
+                      [_vm._v("Accepted file type: .json only")]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1),
+              ]),
+            ]
+          ),
+        ]
+      ),
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
@@ -22127,27 +22290,43 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "form",
+      "div",
       {
-        attrs: {
-          action: "/products",
-          method: "post",
-          enctype: "multipart/form-data",
-        },
+        staticClass:
+          "text-center border-b-2 p-3 bg-teal-400 border border-teal-500",
       },
       [
-        _c("input", {
-          attrs: {
-            type: "file",
-            name: "productJsonFile",
-            id: "fileToUpload",
-            accept: ".json",
+        _c("span", { staticClass: "text-lg font-bold text-white" }, [
+          _vm._v("Load your products file"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "p-3  mt-2 text-center space-x-4 md:block" },
+      [
+        _c(
+          "button",
+          {
+            staticClass:
+              "mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100",
           },
-        }),
+          [_vm._v("\n                        Back\n                    ")]
+        ),
         _vm._v(" "),
-        _c("input", {
-          attrs: { type: "submit", value: "Cadastrar", name: "submit" },
-        }),
+        _c(
+          "button",
+          {
+            staticClass:
+              "mb-2 md:mb-0 bg-teal-400 border border-teal-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-teal-4000",
+          },
+          [_vm._v("Load")]
+        ),
       ]
     )
   },
