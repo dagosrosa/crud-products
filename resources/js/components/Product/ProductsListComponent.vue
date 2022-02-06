@@ -5,8 +5,14 @@
 		<product-delete-component v-if="action == 'delete'" v-on:listProducts="closeAll()" :product="product"></product-delete-component>
 
 		<div class="container">
-			<div class="mt-3 mb-3 float-right" v-if="products.length" v-on:click="uploadProduct()">
-				<a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-teal-400 border-teal-400 hover:border-transparent hover:text-teal hover:bg-white lg:mt-0">Load products</a>
+			<div class="flex items-center justify-between mt-3 mb-3 pt-3 pb-3 border-b-2 border-teal-400 flex-wrap">
+				<h1 class="text-2xl font-semibold text-slate-500">Registered products</h1>
+				<div v-if="products.length" v-on:click="uploadProduct()">
+					<a href="#" class="inline-block text-sm px-4 py-2 flex items-center space-x-2 leading-none border rounded border border-indigo-600 hover:border-transparent hover:text-teal-400 hover:bg-white lg:mt-0">
+						<span class="text-slate-500">Load products</span>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-400 border border-indigo-600 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+					</a>
+				</div>
 			</div>
 			<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg">
 				<thead class="text-white">
@@ -21,14 +27,14 @@
 				</thead>
 				<tbody class="flex-1 sm:flex-none">
 					<tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0" v-for="product in products">
-						<td class="border-grey-light border hover:bg-gray-100 p-3">{{product.title}}</td>
-						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{product.type}}</td>
-						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{product.rating}}</td>
-						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{product.price | currency}}</td>
-						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{product.created_at | formatDate}}</td>
+						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate font-light text-slate-500">{{product.title}}</td>
+						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate font-light text-slate-500">{{product.type}}</td>
+						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate font-light text-slate-500">{{product.rating}}</td>
+						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate font-light text-slate-500">{{product.price | currency}}</td>
+						<td class="border-grey-light border hover:bg-gray-100 p-3 truncate font-light text-slate-500">{{product.created_at | formatDate}}</td>
 						<td class="border-grey-light border hover:bg-gray-100 p-3 flex space-x-4">
-							<div class="hover:text-blue-400 hover:font-medium cursor-pointer" title="Edit" v-on:click="editProduct(product)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></div>
-							<div class="hover:text-red-400 hover:font-medium cursor-pointer" title="Remove"v-on:click="removeProduct(product)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></div>
+							<div class="hover:text-blue-400 hover:font-medium cursor-pointer" title="Edit" v-on:click="editProduct(product)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer bg-blue-400 border rounded-full hover:bg-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></div>
+							<div class="hover:text-red-400 hover:font-medium cursor-pointer" title="Remove"v-on:click="removeProduct(product)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer bg-red-400  border rounded-full hover:bg-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></div>
 						</td>
 					</tr>
 					<tr v-if="!products.length">

@@ -11,7 +11,7 @@
                 <form class="flex flex-col items-center">
                     <div class="p-3">
                         <!--body-->
-                            <h1 class="text-xl mb-4 font-bold text-slate-500 text-center">Do you Want Delete</h1>
+                            <h1 class="text-xl mb-4 font-bold text-slate-500 text-center">Do you want delete "{{product.title}}"?</h1>
                         <!--footer-->
                         <div class="p-3  mt-2 text-center space-x-4 md:block">
                             <button type="button" class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100" v-on:click="close()">

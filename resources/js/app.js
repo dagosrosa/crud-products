@@ -16,14 +16,10 @@ window.Vue = require('vue').default;
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
-Vue.component('products-upload-component', require('./components/ProductsUploadComponent.vue').default);
-Vue.component('product-edit-component', require('./components/ProductEditComponent.vue').default);
-Vue.component('product-delete-component', require('./components/ProductDeleteComponent.vue').default);
+Vue.component('products-list-component', require('./components/product/ProductsListComponent.vue').default);
+Vue.component('products-upload-component', require('./components/product/ProductsUploadComponent.vue').default);
+Vue.component('product-edit-component', require('./components/product/ProductEditComponent.vue').default);
+Vue.component('product-delete-component', require('./components/product/ProductDeleteComponent.vue').default);
 
 Vue.filter('formatDate', function(value) {
     if (value) {
