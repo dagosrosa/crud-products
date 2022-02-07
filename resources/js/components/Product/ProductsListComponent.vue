@@ -14,6 +14,14 @@
 					</a>
 				</div>
 			</div>
+			<form class="w-full max-w-sm mb-3">
+				<div class="flex items-center border-b border-teal-400 py-2">
+					<input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="number" placeholder="Insert productId" aria-label="Full name" v-model="productId">
+					<button class="flex-shrink-0 bg-teal-400 hover:bg-teal-700 border-teal-400 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button" v-on:click="getProduct()">
+						Send
+					</button>
+				</div>
+			</form>
 			<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg">
 				<thead class="text-white">
 					<tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0" v-for="product in products">
@@ -67,17 +75,31 @@
         data() {
             return {
             	products: [],
-				modalHidden: true,
 				action: 'list',
-				product: {}
+				product: {},
+				productId: null,
+				error: null
             }
         },
 
         methods: {
             getProducts() {
-                axios.get('/products')
+				let url = '/products';
+
+				if (this.productId) {
+					url = `/products/${this.productId}`;
+				}
+
+                axios.get(url)
                 .then(response=> (this.products = response.data))
-                .catch(error=> console.log(error))
+                .catch(error=> {
+					this.error = error;
+					this.products = [];
+				})
+            },
+
+            getProduct() {
+				this.getProducts();
             },
 
 			uploadProduct() {

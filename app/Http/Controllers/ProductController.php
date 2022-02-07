@@ -32,6 +32,22 @@ class ProductController extends Controller
     }
 
     /**
+     * Return the specified resource.
+     *@param  int  $id
+     *@param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request  $request, $id)
+    {
+        $product = Product::find($id);
+        if ($product) {
+            return \Response::json(array($product), 200);
+        } else {
+            return \Response::json(array($product), 404);
+        }
+    }
+
+    /**
      * Create a new resource.
      *
      * @return \Illuminate\Http\Response

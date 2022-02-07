@@ -259,6 +259,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -271,20 +279,31 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       products: [],
-      modalHidden: true,
       action: 'list',
-      product: {}
+      product: {},
+      productId: null,
+      error: null
     };
   },
   methods: {
     getProducts: function getProducts() {
       var _this = this;
 
-      axios.get('/products').then(function (response) {
+      var url = '/products';
+
+      if (this.productId) {
+        url = "/products/".concat(this.productId);
+      }
+
+      axios.get(url).then(function (response) {
         return _this.products = response.data;
       })["catch"](function (error) {
-        return console.log(error);
+        _this.error = error;
+        _this.products = [];
       });
+    },
+    getProduct: function getProduct() {
+      this.getProducts();
     },
     uploadProduct: function uploadProduct() {
       this.action = 'upload';
@@ -22739,6 +22758,56 @@ var render = function () {
               : _vm._e(),
           ]
         ),
+        _vm._v(" "),
+        _c("form", { staticClass: "w-full max-w-sm mb-3" }, [
+          _c(
+            "div",
+            { staticClass: "flex items-center border-b border-teal-400 py-2" },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.productId,
+                    expression: "productId",
+                  },
+                ],
+                staticClass:
+                  "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+                attrs: {
+                  type: "number",
+                  placeholder: "Insert productId",
+                  "aria-label": "Full name",
+                },
+                domProps: { value: _vm.productId },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.productId = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "flex-shrink-0 bg-teal-400 hover:bg-teal-700 border-teal-400 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.getProduct()
+                    },
+                  },
+                },
+                [_vm._v("\n\t\t\t\t\tSend\n\t\t\t\t")]
+              ),
+            ]
+          ),
+        ]),
         _vm._v(" "),
         _c(
           "table",
