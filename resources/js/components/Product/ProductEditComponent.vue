@@ -10,6 +10,7 @@
                 <!--content-->
                 <form class="flex flex-col items-center">
                     <div class="p-3">
+                    <span class="block mb-2 text-sm text-red-400">{{error}}</span>
                         <!--body-->
                         <div class="mb-4 md:flex md:justify-between">
                             <div class="mb-4 md:mr-2 md:mb-0">
@@ -24,6 +25,7 @@
                                     placeholder="Insert title"
                                     required
                                 />
+                                <span class="block mb-2 text-sm text-red-400" v-if="!product.title">The title is required.</span>
                             </div>
                             <div class="mb-4 md:mr-2 md:mb-0">
                                 <label class="block mb-2 text-sm font-bold text-gray-700" for="title">
@@ -37,6 +39,7 @@
                                     placeholder="Insert type"
                                     required
                                 />
+                                <span class="block mb-2 text-sm text-red-400" v-if="!product.type">The type is required.</span>
                             </div>
                         </div>
 
@@ -51,7 +54,6 @@
                                     id="rating"
                                     type="number"
                                     placeholder="Insert rating"
-                                    required
                                 />
                             </div>
                             <div class="mb-4 md:mr-2 md:mb-0">
@@ -66,6 +68,7 @@
                                     placeholder="Insert price"
                                     required
                                 />
+                                <span class="block mb-2 text-sm text-red-400" v-if="!product.price">The price is required.</span>
                             </div>
                         </div>
                         <!--footer-->
@@ -86,16 +89,33 @@
     export default {
         props: ['product'],
 
+          data() {
+            return {
+                error: null
+            }
+        },
+
         methods: {
 			close() {
                 this.$emit('listProducts');
 			},
 
             editProduct() {
+                    if (!this.formIsValid()) return;
+
                     axios.put(`/products/${this.product.id}`, this.product)
                     .then(response=> (this.close()))
-                    .catch(error=> console.log(error))
-            }
+                    .catch(error=> this.error = error )
+            },
+
+            formIsValid() {
+                if (!this.product.title || !this.product.type || !this.product.price) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+
         }
     }
 </script>

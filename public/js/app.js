@@ -155,8 +155,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['product'],
+  data: function data() {
+    return {
+      error: null
+    };
+  },
   methods: {
     close: function close() {
       this.$emit('listProducts');
@@ -164,11 +172,19 @@ __webpack_require__.r(__webpack_exports__);
     editProduct: function editProduct() {
       var _this = this;
 
+      if (!this.formIsValid()) return;
       axios.put("/products/".concat(this.product.id), this.product).then(function (response) {
         return _this.close();
       })["catch"](function (error) {
-        return console.log(error);
+        return _this.error = error;
       });
+    },
+    formIsValid: function formIsValid() {
+      if (!this.product.title || !this.product.type || !this.product.price) {
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 });
@@ -22328,6 +22344,10 @@ var render = function () {
             _vm._v(" "),
             _c("form", { staticClass: "flex flex-col items-center" }, [
               _c("div", { staticClass: "p-3" }, [
+                _c("span", { staticClass: "block mb-2 text-sm text-red-400" }, [
+                  _vm._v(_vm._s(_vm.error)),
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "mb-4 md:flex md:justify-between" }, [
                   _c("div", { staticClass: "mb-4 md:mr-2 md:mb-0" }, [
                     _c(
@@ -22371,6 +22391,14 @@ var render = function () {
                         },
                       },
                     }),
+                    _vm._v(" "),
+                    !_vm.product.title
+                      ? _c(
+                          "span",
+                          { staticClass: "block mb-2 text-sm text-red-400" },
+                          [_vm._v("The title is required.")]
+                        )
+                      : _vm._e(),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "mb-4 md:mr-2 md:mb-0" }, [
@@ -22415,6 +22443,14 @@ var render = function () {
                         },
                       },
                     }),
+                    _vm._v(" "),
+                    !_vm.product.type
+                      ? _c(
+                          "span",
+                          { staticClass: "block mb-2 text-sm text-red-400" },
+                          [_vm._v("The type is required.")]
+                        )
+                      : _vm._e(),
                   ]),
                 ]),
                 _vm._v(" "),
@@ -22449,7 +22485,6 @@ var render = function () {
                         id: "rating",
                         type: "number",
                         placeholder: "Insert rating",
-                        required: "",
                       },
                       domProps: { value: _vm.product.rating },
                       on: {
@@ -22505,6 +22540,14 @@ var render = function () {
                         },
                       },
                     }),
+                    _vm._v(" "),
+                    !_vm.product.price
+                      ? _c(
+                          "span",
+                          { staticClass: "block mb-2 text-sm text-red-400" },
+                          [_vm._v("The price is required.")]
+                        )
+                      : _vm._e(),
                   ]),
                 ]),
                 _vm._v(" "),
